@@ -19,7 +19,7 @@ Use logic, eliminate possibilities, and crack the number.
 
 ## Play
 
-Live demo coming soon.
+[Play Bulls and Cows](https://sofi-codes.github.io/bulls-and-cows-game/)
 
 ## Preview
 
