@@ -1,0 +1,511 @@
+:root {
+  --page: #1f1f1f;
+  --bg: #f3ece8;
+  --ink: #1c1c1c;
+  --pink: #e0719a;
+  --button: #e68fa8;
+  --tile: #e07396;
+  --gray: #c4bcb8;
+  --green: #acd781;
+  --lime: #f2c08b;
+}
+ 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+html { -webkit-text-size-adjust: 100%; }
+ 
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  background: var(--page);
+  font-family: 'Fredoka', sans-serif;
+  color: var(--ink);
+}
+ 
+/* ---------- Shared ---------- */
+.screen {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg);
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  overflow-x: clip;
+}
+ 
+.hand {
+  font-family: 'Indie Flower', cursive;
+  font-weight: 400;
+  text-align: center;
+}
+ 
+.icon { display: block; max-width: 100%; object-fit: cover; }
+ 
+.rule-line {
+  width: 87.4%;
+  height: 1px;
+  border: 0;
+  background: var(--ink);
+}
+ 
+/* ---------- Home ---------- */
+.lets-play {
+  margin-top: clamp(48px, 9dvh, 96px);
+  font-family: 'Fredoka One', 'Fredoka', sans-serif;
+  font-weight: 400;
+  font-size: clamp(30px, 9.74vw, 42px);
+  line-height: 1.25;
+  letter-spacing: 1px;
+  color: var(--pink);
+}
+ 
+.home-title-row {
+  width: 100%;
+  margin-top: clamp(12px, 2.8dvh, 30px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5%;
+}
+.home-title-row .icon { width: 7.7%; max-width: 32px; height: auto; }
+.home-title { 
+  font-size: clamp(32px, 10.77vw, 46px);
+  line-height: 1.2;
+}
+ 
+.ask {
+  width: 74%;
+  margin-top: clamp(40px, 11.8dvh, 120px);
+  font-size: clamp(28px, 9.49vw, 41px);
+  line-height: 1.14;
+}
+ 
+/* rotated number pair, positioned in % of its own box */
+.numbers {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 390 / 85;
+  margin-top: clamp(12px, 2.7dvh, 30px);
+}
+.num {
+  position: absolute;
+  font-family: 'Fredoka One', 'Fredoka', sans-serif;
+  font-size: clamp(32px, 10.77vw, 46px);
+  line-height: 1;
+  color: var(--gray);
+  white-space: nowrap;
+  transform-origin: left bottom;
+}
+.num-1 { left: 33.8%; top: 1%;  transform: rotate(-10deg); }
+.num-2 { left: 47.2%; top: 33%; transform: rotate(-8deg); }
+.green { color: var(--green); }
+.lime  { color: var(--lime); }
+ 
+.go {
+  align-self: center;
+  margin-left: 0;
+  margin-top: clamp(1px, -2dvh, 2px);
+  width: 30%;
+  min-width: 108px;
+  max-width: 130px;
+  height: clamp(48px, 6.4dvh, 58px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: var(--button);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.40);
+  font-family: 'Indie Flower', cursive;
+  font-size: clamp(22px, 7.18vw, 31px);
+  color: var(--ink);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: hidden;                         /* keeps the shine inside the button */
+  animation: none;
+  margin-bottom: clamp(28px, 5dvh, 56px);   /* top line can never touch the button */
+}
+
+/* diagonal light sweep */
+.go::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transform: skewX(-20deg);
+  animation: go-shine 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes go-shine {
+  0%        { left: -75%; }
+  40%, 100% { left: 130%; }      /* sweeps across, then waits */
+}
+
+.go:hover  { filter: brightness(1.06); }
+.go:active { animation: none; transform: scale(0.96); box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3); }
+
+
+.rules {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 20px;                                              /* keeps the open text off the button area */
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(32px, 6dvh, 60px));
+  display: flex;
+  justify-content: center;
+}
+
+.how {
+  --gap: clamp(18px, 3.2dvh, 30px);       /* ONE value controls all the spacing */
+  width: 87.4%;
+  flex: none;              /* stops the flex container from squeezing it */
+  min-width: 200px;
+  border-top: 1px solid var(--ink);       /* top line */
+  border-bottom: 1px solid var(--ink);    /* bottom line */
+  margin: 0 auto;        /* centres the box */
+  align-self: center;    /* centres it even if .rules is a column flex container */
+}
+
+.how summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: var(--gap) 0;                  /* title sits in the middle of the two lines */
+  list-style: none;
+  cursor: pointer;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  font-size: clamp(16px, 4.9vw, 21px);
+  line-height: 1.2;
+  color: var(--pink);
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+.how summary::-webkit-details-marker { display: none; }
+.how summary::after {
+  content: "▾";
+  transition: transform 0.25s ease;
+}
+.how[open] summary { padding-bottom: 10px; }
+.how[open] summary::after { transform: rotate(180deg); }
+
+.how-body {
+  padding: 0 4% var(--gap);               /* side space + SAME gap above the bottom line */
+  text-align: left;
+  font-size: clamp(13px, 4.1vw, 17px);
+  font-weight: 500;
+  line-height: 1.4;
+  animation: how-open 0.3s ease;
+}
+.how-body p + p { margin-top: 8px; }
+
+.how-example {
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(224, 113, 154, 0.15);
+}
+
+@keyframes how-open {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Game ---------- */
+.game-header {
+  position: relative;
+  width: 100%;
+  margin-top: clamp(6px, 1.1dvh, 12px);
+  padding-bottom: clamp(2px, 1.2dvh, 12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.3%;
+}
+.game-header .icongame { height: clamp(22px, 7.95vw, 22px); width: auto; }
+.game-title { font-size: clamp(18px, 5.64vw, 25px); line-height: 1.3; }
+ 
+.header-line { width: 90.3%; }
+
+.back {
+  position: absolute;
+  left: 3%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;               /* tap target size */
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Indie Flower', cursive;
+  font-size: clamp(24px, 7.2vw, 30px);
+  color: var(--ink);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.back:active { opacity: 0.5; }
+ 
+.intro {
+  width: 100%;
+  margin-top: clamp(14px, 3.7dvh, 40px);
+  font-size: clamp(18px, 5.64vw, 25px);
+  line-height: 2.05;
+}
+ 
+.reminder {
+  width: 100%;
+  margin-top: clamp(6px, 1.3dvh, 16px);
+  text-align: center;
+  font-size: clamp(14px, 4.62vw, 20px);
+  font-weight: 500;
+  line-height: 1.22;
+  opacity: 0.85;
+}
+ 
+.guess {
+  width: 100%;
+  margin-top: clamp(16px, 3.8dvh, 40px);   /* space between every row */
+}
+.guess:first-of-type {
+  margin-top: clamp(24px, 5.4dvh, 60px);   /* a bit more space under the reminder */
+}
+
+/* ===== guess count + submit button ===== */
+.guess-row {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.guess-count {
+  position: absolute;
+  left: 4%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: clamp(12px, 3.4vw, 14.5px);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.submit-btn {
+  position: absolute;
+  left: 81%;                        /* the tiles end at 77%, so this sits just right of them */
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(22px, 9.2vw, 40px);
+  height: clamp(22px, 9.2vw, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 24%;
+  background: var(--tile);
+  color: #1a1919;                   /* check colour */
+  cursor: pointer;
+  -webkit-appearance: none; 
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.submit-btn svg { width: 62%; height: 62%; display: block; }
+.submit-btn:active { transform: translateY(-50%) scale(0.94); }
+ 
+.tiles {
+  width: 52.6%;
+  margin-left: 24.4%;
+  display: flex;
+  gap: 3.4%;
+}
+.tile {
+  flex: 1;
+  aspect-ratio: 46 / 44;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24%;
+  background: var(--tile);
+  font-family: 'Fredoka';
+  font-size: clamp(21px, 6.67vw, 26px);
+  color: var(--ink);
+}
+ 
+
+input.tile {
+  width: 100%;
+  min-width: 0;                 /* lets the tiles shrink evenly in the flex row */
+  text-align: center;
+  border: none;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  caret-color: transparent;
+  cursor: text;
+}
+input.tile:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: #d9648a;   
+}
+
+/* custom cursor: same 2px line in every tile, only while the focused tile is empty */
+input.tile:focus:placeholder-shown {
+  background-image: linear-gradient(var(--ink), var(--ink));
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 2px 52%;
+  animation: caret-blink 1s steps(1) infinite;
+}
+@keyframes caret-blink {
+  50% { background-size: 0 0; }
+}
+
+.labels {
+  width: 52.6%;                  /* same as .tiles */
+  margin-left: 23.0%;            /* same as .tiles */
+  margin-top: clamp(8px, 1.2dvh, 11px);
+  display: flex;
+  justify-content: space-between; /* Bulls at the left edge, Cows at the right edge */
+  font-size: clamp(14px, 4.36vw, 19px);
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.labels span { flex: 1; text-align: center; }
+ 
+/* ---------- Media queries ---------- */
+ 
+/* very small phones (iPhone SE 1st gen, small Androids) */
+@media (max-width: 340px) {
+  .home-title-row { padding: 0; }
+  .rule-text { letter-spacing: -0.2px; }
+}
+ 
+/* short screens (iPhone SE, landscape-ish, browser chrome visible) */
+@media (max-height: 700px) {
+  .lets-play { margin-top: 36px; }
+  .ask { margin-top: 28px; }
+  .rules { padding-top: 24px; }
+}
+ 
+/* landscape phones: let content scroll naturally */
+@media (orientation: landscape) and (max-height: 500px) {
+  .screen { min-height: 0; }
+  .lets-play { margin-top: 24px; }
+  .ask { margin-top: 24px; }
+  .rules { padding-top: 32px; }
+}
+ 
+/* tablets / desktop: show as a centred phone-sized column */
+@media (min-width: 431px) {
+  body { align-items: center; padding: 24px 0; }
+  .screen {
+    min-height: 844px;
+    min-height: min(844px, calc(100dvh - 48px));
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+  }
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+  .go:active { transform: none; }
+}
+
+/* empty space under the bottom line, can't be overridden by older rules */
+.page-end {
+  flex: none;                                          /* never shrinks */
+  width: 100%;
+  height: calc(env(safe-area-inset-bottom, 0px) + clamp(32px, 6dvh, 56px));
+}
+
+/* the footer must never be squeezed or clipped */
+.rules { flex: none; }
+
+/* ----- locked rows: check button stays visible but can't be pressed ----- */
+.submit-btn:disabled { opacity: 1; color: #4a4a4a; cursor: default; }
+
+/* ----- message popup (validation errors) ----- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+  transform: translateX(-50%) translateY(16px);
+  max-width: 90%;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(28, 28, 28, 0.92);
+  color: var(--bg);
+  font-size: clamp(14px, 4vw, 16px);
+  font-weight: 500;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ----- win message ----- */
+.win {
+  width: 87.4%;
+  margin-top: clamp(24px, 5dvh, 48px);
+  text-align: center;
+  font-size: clamp(15px, 4.6vw, 19px);
+  font-weight: 500;
+  line-height: 1.5;
+}
+.win-title {
+  margin-bottom: 6px;
+  font-family: 'Fredoka One', 'Fredoka', sans-serif;
+  font-size: clamp(26px, 8vw, 34px);
+  letter-spacing: 1px;
+  color: var(--pink);
+}
+.again {
+  margin-top: 14px;
+  padding: 10px 26px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--button);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  font-family: 'Indie Flower', cursive;
+  font-size: clamp(20px, 6vw, 26px);
+  color: var(--ink);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.again:active { transform: scale(0.96); }
+
+/* ----- Give Up button ----- */
+.giveup-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(24px, 5dvh, 48px);
+}
+.giveup {
+  padding: 8px 24px;
+  border: 1.5px solid var(--pink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--pink);
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  font-size: clamp(14px, 4.1vw, 17px);
+  line-height: 1.2;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.giveup:active { transform: scale(0.96); background: rgba(224, 113, 154, 0.12); }

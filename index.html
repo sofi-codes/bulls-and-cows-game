@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500&family=Fredoka+One&family=Indie+Flower&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <title>Bulls and Cows</title>
+</head>
+<body>
+  <main class="screen home">
+ 
+    <h2 class="lets-play">LET'S PLAY</h2>
+ 
+    <div class="home-title-row">
+      <img class="icon" src="bull.jpg" alt="Bull">
+      <h1 class="hand home-title">Bulls and Cows</h1>
+      <img class="icon" src="cow.jpg" alt="Cow">
+    </div>
+ 
+    <p class="hand ask">Can you guess the 4-digit code?</p>
+ 
+    <div class="numbers" aria-hidden="true">
+      <span class="num num-1">8341</span>
+      <span class="num num-2"><span class="green">8</span>0<span class="lime">3</span>2</span>
+    </div>
+ 
+    <a class="go" href="game.html">GO! →</a>
+ 
+  <footer class="rules">
+  <details class="how">
+    <summary>How to Play?</summary>
+    <div class="how-body">
+      <p>I think of a secret <b>4-digit number</b> with no repeated digits.</p>
+      <p>You guess it, and after every guess I tell you:</p>
+      <p><b>Bulls</b>: right digit in the right place</p>
+      <p><b>Cows</b>: right digit in the wrong place</p>
+      <p class="how-example">Eg. Secret 8341, Guess 8032<br>= 1 Bull (8) and 1 Cow (3)</p>
+      <p>Crack the code in as few guesses as you can!</p>
+    </div>
+  </details>
+  </footer>  
+   <div class="page-end"></div>
+  </main>
+</body>
+</html>  
